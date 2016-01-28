@@ -1,0 +1,18 @@
+exportPattern("^[[:alpha:]]+")
+export(curereg,
+       plot.curereg,
+       lines.curereg,
+       predict.curereg,
+       curefraction,
+       dmoeev,
+       pmoeev,
+       qmoeev,
+       rmoeev)
+
+S3method(print,curereg)
+S3method(coef, curereg)
+S3method(summary, curereg)
+S3method(logLik, curereg)
+S3method(vcov, curereg)
+S3method(plot, curereg)
+S3method(lines, curereg)

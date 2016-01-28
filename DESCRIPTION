@@ -1,0 +1,13 @@
+Package: flexcure
+Type: Package
+Title: Regression for a Flexible Parametric Survival Models with Cure Fraction
+Version: 0.1
+Date: 2015-06-11
+Authors@R: c(person("Rumenick Pereira da", "Silva", email = "rumenickbf@hotmail.com", role = c("aut", "cre")), person("Dione Maria", "Valença", email = "dione@ccet.ufrn.br", role = "aut"))
+Author: Rumenick Pereira da Silva [aut, cre], Dione Maria Valença [aut]
+Description: Uma implementação para análisar dados de sobrevivência, a partir do uso de modelos paramétricos flexíveis de sobrevivência com fração de cura, incluindo os modelos de mistura padrão e tempo de promoção para gama generalizada, F generalizada e Weibull na forma extendida de Marshall Olkin. Além disso, é fornecido um conjunto de ferramentas para potencialiazar os resultados provenientes de um ajuste.
+License: GPL (>= 2)
+LazyData: TRUE
+Depends: flexsurv (>= 0.6), R (>= 3.0.2)
+Imports: ggplot2 (>= 1.0.1),
+    compiler (>= 3.1.2)
