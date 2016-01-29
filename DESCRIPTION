@@ -1,11 +1,11 @@
 Package: flexcure
 Type: Package
-Title: Regression for a Flexible Parametric Survival Models with Cure Fraction
+Title: Flexible Parametric Survival Models with Cure Fraction
 Version: 0.1
 Date: 2015-06-11
-Authors@R: c(person("Rumenick Pereira da", "Silva", email = "rumenickbf@hotmail.com", role = c("aut", "cre")), person("Dione Maria", "Valença", email = "dione@ccet.ufrn.br", role = "aut"))
+Authors@R: c(person("Rumenick Pereira da", "Silva", email = "rumenickbf@hotmail.com", role = c("aut", "cre")), person("Dione Maria", "Valenca", email = "dione@ccet.ufrn.br", role = "aut"))
 Author: Rumenick Pereira da Silva [aut, cre], Dione Maria Valença [aut]
-Description: Uma implementação para análisar dados de sobrevivência, a partir do uso de modelos paramétricos flexíveis de sobrevivência com fração de cura, incluindo os modelos de mistura padrão e tempo de promoção para gama generalizada, F generalizada e Weibull na forma extendida de Marshall Olkin. Além disso, é fornecido um conjunto de ferramentas para potencialiazar os resultados provenientes de um ajuste.
+Description: The flexcure package provides R implementations for analyze survival data, as from flexible parametric survival models with cure fraction. In this package, were considered the parametric accelerated failure time models: classics, the extended generalized gamma, the generalized F and Marshall Olkin extended Weibull, for to model time of susceptible elements. For the cured fraction, were considered the usual models of standard mixture and of promotion time. There are also tools that permit the exploitation of the fit and functions to generate a dataset with cure fraction, using one model specific.
 License: GPL (>= 2)
 URL: https://github.com/Rumenick/flexcure.git
 BugReports: http://github.com/Rumenick/flexcure/issues
