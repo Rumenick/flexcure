@@ -11,8 +11,7 @@
 }
 \description{
   Density, distribution function, quantile function and random generation for the Marshall-Olkin
-  extended extreme value distribution (MOEEV) distribution with with location parameter mu,
-  scale parameter sigma and tilt paramater alpha.
+  extended extreme value distribution (MOEEV) distribution with location parameter mu, scale parameter sigma and tilt paramater alpha.
 }
 \usage{
 dmoeev(x, mu = 0, sigma, alpha = 1, log = FALSE)
@@ -61,8 +60,7 @@ rmoeev(n, mu = 0, sigma, alpha = 1)
   Weibull distributions with the following parameterisations:
 
   \tabular{lcl}{
-    \code{dmoeev(x, mu, sigma = 1, alpha = 1)} \tab \code{ = } \tab \code{dexp(x, rate = 1/exp(mu
-    )} \cr
+    \code{dmoeev(x, mu, sigma = 1, alpha = 1)} \tab \code{ = } \tab \code{dexp(x, rate = 1/exp(mu))} \cr
     \code{dmoeev(x, mu, sigma, alpha = 1)} \tab \code{ = } \tab  \code{dweibull(x, shape=1/sigma,
     scale=exp(mu))} \cr
   }
