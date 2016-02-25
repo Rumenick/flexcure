@@ -292,7 +292,7 @@ curereg.dists <- list(
 
 curereg <- function(formula, cureformula=~1, data, weights = NULL, timedist = "moeev",
                     ncausedist = "poisson", subset = NULL, na.action = "na.omit", inits = NULL,
-                    method = "BFGS", ...) {
+                    method = "SANN", ...) {
    call <- match.call()
    argsfun <- list(...)
    if (is.null(cureformula) || missing(cureformula)) {
@@ -305,8 +305,10 @@ curereg <- function(formula, cureformula=~1, data, weights = NULL, timedist = "m
      ncausedist <- match.arg(tolower(ncausedist), c("bernoulli", "poisson"))
      dcure <- ifelse(ncausedist=="bernoulli", "sm", "pt")
      dist <- match.arg(paste0(timedist, dcure), names(curereg.dists))
-     initp <- ifelse(class(data) == "list", 1-mean(data[[all.vars(formula)[2]]]),
-                     ifelse(class(data) == "data.frame", 1-mean(data[,all.vars(formula)[2]]),
+     initp <- ifelse(missing(data),
+                     1-mean(get(all.vars(formula)[2])),
+                     ifelse(inherits(data, c("list", "data.frame")),
+                            1-mean(data[[all.vars(formula)[2]]]),
                             stop("Must be data.frame or list")))
      curereg.dists[[dist]]$inits <- curereg.dists[[dist]]$inits(initp=initp)
      argsfun$anc <- list(theta=cureformula)
