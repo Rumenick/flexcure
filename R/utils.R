@@ -104,7 +104,7 @@ qplot_survival <- function(f.survfit, f.CI="default", f.shape=3){
       # hint: censoring data for multiple censoring events at timepoint are overplotted
       # (unlike in plot.survfit in survival package)
       ggplot(data=f.frame) + geom_step(aes(x=time, y=surv), direction="hv") + geom_step(aes(x=time,
-                                                                                            y=upper), directions="hv", linetype=3) + geom_step(aes(x=time,y=lower), direction="hv", linetype=3) +
+                                                                                            y=upper), direction="hv", linetype=3) + geom_step(aes(x=time,y=lower), direction="hv", linetype=3) +
         geom_point(data=subset(f.frame, n.censor>=1), aes(x=time, y=surv), shape=f.shape)
     }
     else {
@@ -122,7 +122,7 @@ qplot_survival <- function(f.survfit, f.CI="default", f.shape=3){
     else {
       # with CI (hint: use alpha for CI)
       ggplot(data=f.frame, aes(colour=strata, group=strata)) + geom_step(aes(x=time, y=surv),
-                                                                         direction="hv") + geom_step(aes(x=time, y=upper), directions="hv", linetype=3, alpha=0.5) +
+                                                                         direction="hv") + geom_step(aes(x=time, y=upper), direction="hv", linetype=3, alpha=0.5) +
         geom_step(aes(x=time,y=lower), direction="hv", linetype=3, alpha=0.5) +
         geom_point(data=subset(f.frame, n.censor>=1), aes(x=time, y=surv), shape=f.shape)
     }
