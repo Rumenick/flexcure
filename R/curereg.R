@@ -290,9 +290,9 @@ curereg.dists <- list(
 
 #  Função para ajuste de modelos com fração de cura:
 
-curereg <- function(formula, cureformula=~1, data, weights = NULL, timedist = "moeev",
-                    ncausedist = "poisson", subset = NULL, na.action = "na.omit", inits = NULL,
-                    method = "SANN", ...) {
+curereg <- function(formula, cureformula=~1, data, weights, timedist = "moeev",
+                    ncausedist = "poisson", subset, na.action, inits, method = "SANN", ...) {
+
    call <- match.call()
    argsfun <- list(...)
    if (is.null(cureformula) || missing(cureformula)) {
@@ -318,27 +318,33 @@ curereg <- function(formula, cureformula=~1, data, weights = NULL, timedist = "m
   argsfun$control$maxit <- if (is.null(argsfun$control$maxit)) 10000 else argsfun$control$maxit
   argsfun$formula <- formula
   argsfun$data <- data
-  argsfun$weights <- weights
-  argsfun$inits <- inits
+  argsfun$weights <- if(missing(weights)) NULL else weights
+  argsfun$inits <- if(missing(inits)) NULL else inits
   argsfun$dist <- if (dist %in% names(curereg.dists)) curereg.dists[[dist]]  else dist
   argsfun$method <- method
-  argsfun$subset <- subset
-  argsfun$na.action <- na.action
+  argsfun$subset <- if(missing(subset)) NULL else subset
+  argsfun$na.action <- if(missing(na.action)) NULL else na.action
+
   # Ajustando modelo
   fit <- do.call(flexsurv::flexsurvreg, argsfun)
+
   # Construindo saída
   out <- list(call = call)
   out$formula <- formula
   out$cureformula <- cureformula
+
   if(!is.null(dcure)) out$dcure <- ifelse(dcure == "sm", "standart mixture model", "promotion time model") else out$dcure <- NULL
   out$X <- model.matrix(fit, fit$dlist$location)
   out$Z <- model.matrix(fit, "theta")
+
   if(is.null(names(fit$coef))) names.pars <- fit$dlist$par else names.pars <- names(fit$coef)
+
   for (i in seq_along(names.pars)) {
     if (any(names.pars[i] == c("sigma", "alpha", "shape", "P", "sdlog", "s1", "s2", "k"))) {
       names.pars[i] <- paste0("Log", "(", names.pars[i], ")")
     } else names.pars[i] <- names.pars[i]
   }
+
   if (is.null(argsfun$anc)) {
     if (dim(out$X)[2] == 1) {
       iloc <- grep(fit$dlist$location,names.pars)
@@ -491,8 +497,8 @@ summary.curereg  <- function(x, ...) {
 }
 
 # terms = time or cure or NULL (default)
-coef.curereg <- function(x, terms=NULL){
-  if(is.null(terms)) x$coefficients else x$coefficients[[paste0("coef.",terms)]]
+coef.curereg <- function(x, terms){
+  if(missing(terms)) x$coefficients else x$coefficients[[paste0("coef.",terms)]]
 }
 
 # Usar flexsurv::model.frame.flexsurvreg
