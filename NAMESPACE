@@ -1,8 +1,13 @@
 exportPattern("^[[:alpha:]]+")
 export(curereg,
+       print.curereg,
+       summary.curereg,
+       coef.curereg,
+       logLik.curereg,
+       vcov.curereg,
+       predict.curereg,
        plot.curereg,
        lines.curereg,
-       predict.curereg,
        curefraction,
        dmoeev,
        pmoeev,
@@ -16,3 +21,6 @@ S3method(logLik, curereg)
 S3method(vcov, curereg)
 S3method(plot, curereg)
 S3method(lines, curereg)
+
+import(flexsurv)
+import(ggplot2)

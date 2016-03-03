@@ -10,7 +10,7 @@
 Adiciona a curva da sobrevivência estimada usando o modelo paramétrico, a parti da saída da função  \code{\link{curereg}} no gráfico originado pela função \code{plot.curereg}.
 }
 \usage{
-lines.curereg(...)
+lines(...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

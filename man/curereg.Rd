@@ -19,7 +19,7 @@
 \usage{
 curereg(formula, cureformula = ~1, data, weights = NULL, timedist = "moeev",
         ncausedist = "poisson", subset = NULL, na.action = "na.omit",
-        inits = NULL, method = "BFGS", ...)
+        inits = NULL, method = "SANN", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

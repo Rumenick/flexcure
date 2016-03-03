@@ -10,7 +10,7 @@
 Realiza a predição/estimação da função de sobrevivência usando a saída da função \code{curereg} para ser usado pelas funções: \code{plot.curereg} e \code{lines.curereg}
 }
 \usage{
-predict.curereg(x)
+predict(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

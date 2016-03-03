@@ -13,7 +13,7 @@
   para diagnosticar a qualidade do ajuste do modelo.
 }
 \usage{
-plot.curereg(...)
+plot(...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
