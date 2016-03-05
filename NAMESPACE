@@ -21,8 +21,9 @@ S3method(vcov, curereg)
 S3method(plot, curereg)
 S3method(lines, curereg)
 
-import(flexsurv, flexsurvreg)
-import(flexsurv, plot.flexsurvreg)
-import(flexsurv, lines.flexsurvreg)
+importFrom(flexsurv, flexsurvreg)
+importFrom(flexsurv, plot.flexsurvreg)
+importFrom(flexsurv, lines.flexsurvreg)
+
 
 
