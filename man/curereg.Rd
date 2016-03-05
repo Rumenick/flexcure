@@ -17,9 +17,9 @@
 
 
 \usage{
-curereg(formula, cureformula = ~1, data, weights = NULL, timedist = "moeev",
-        ncausedist = "poisson", subset = NULL, na.action = "na.omit",
-        inits = NULL, method = "SANN", ...)
+curereg(formula, cureformula = ~1, data, weights, timedist = "moeev",
+        ncausedist = "poisson", subset, na.action,
+        inits, method = "SANN", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -163,7 +163,7 @@ curereg(formula, cureformula = ~1, data, weights = NULL, timedist = "moeev",
 \value{
   Lista de classe "curereg" contendo informações sobre o modelo ajustado, que pode ser estudada
   através das funções: \code{print}, \code{summary}, \code{\link{coef.curereg}},
-  \code{\link{predict.curereg}}, \code{\link{plot.curereg}} e \code{\link{lines.curereg}}.
+  \code{\link{curefraction}}, \code{\link{plot.curereg}} e \code{\link{lines.curereg}}.
   Componentes de interesse para os usuários podem incluir:
 
   \item{call }{
