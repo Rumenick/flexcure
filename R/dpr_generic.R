@@ -7,7 +7,7 @@ pgeneric <- function() {
 }
 
 rgeneric <- function(n, rtimedist, rncausedist, partimedist, parncausedist, control) {
-  #if (n <= 0) stop('\nInvalid arguments n')
+  if (n <= 0) stop('\nInvalid arguments n')
   partimedist <- lapply(partimedist, rep_len, length.out = n)
   parncausedist <- lapply(parncausedist, rep_len, length.out = n)
   parncausedist$n <- n

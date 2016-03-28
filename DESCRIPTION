@@ -4,11 +4,27 @@ Title: Flexible Parametric Survival Models with Cure Fraction
 Version: 0.1
 Date: 2015-06-11
 Authors@R: c(person("Rumenick Pereira da", "Silva", email = "rumenickbf@hotmail.com", role = c("aut", "cre")), person("Dione Maria", "Valenca", email = "dione@ccet.ufrn.br", role = "aut"))
-Author: Rumenick Pereira da Silva [aut, cre], Dione Maria Valença [aut]
-Description: The flexcure package provides R implementations for analyze survival data, as from flexible parametric survival models with cure fraction. In this package, were considered the parametric accelerated failure time models: classics, the extended generalized gamma, the generalized F and Marshall Olkin extended Weibull, for to model time of susceptible elements. For the cured fraction, were considered the usual models of standard mixture and of promotion time. There are also tools that permit the exploitation of the fit and functions to generate a dataset with cure fraction, using one model specific.
+Author: Rumenick Pereira da Silva [aut, cre], Dione Maria Valen\c{c}a [aut]
+Description: The flexcure package provides R implementations for analyze
+    survival data, as from flexible parametric survival models with cure fraction.
+    In this package, were considered the parametric accelerated failure time models:
+    classics, the extended generalized gamma, the generalized F and Marshall Olkin
+    extended Weibull, for to model time of susceptible elements. For the cured
+    fraction, were considered the usual models of standard mixture and of promotion
+    time. There are also tools that permit the exploitation of the fit and functions
+    to generate a dataset with cure fraction, using one model specific.
 License: GPL (>= 2)
 URL: https://github.com/Rumenick/flexcure.git
 BugReports: http://github.com/Rumenick/flexcure/issues
 LazyData: TRUE
-Depends: flexsurv (>= 0.6), R (>= 3.0.2)
-
+Depends:
+    flexsurv (>= 0.6),
+    R (>= 3.0.2)
+RoxygenNote: 5.0.1
+Collate:
+    'dpr_generic.R'
+    'cure_models.R'
+    'curereg.R'
+    'utils-flexsurv.R'
+    'moeev.R'
+    'utils.R'
