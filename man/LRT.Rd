@@ -40,7 +40,7 @@ LRT(fitg, fits)
 
 }
 \author{
-Rumenick Pereira da Silva <rumenickbf@hotmail.com>
+Rumenick Pereira da Silva \email{rumenickps@gmail.com}
 }
 \keyword{test}
 

@@ -67,7 +67,7 @@
 #' Marshall, A. W., Olkin, I.(2007). Life Distributions: Structure of Nonparametric,
 #' Semiparametric, and Parametric Families. Springer, New York.
 #'
-#' @author Rumenick Pereira da Silva <rumenickbf@hotmail.com>
+#' @author Rumenick Pereira da Silva \email{rumenickps@gmail.com}
 #'
 #' @examples
 #'

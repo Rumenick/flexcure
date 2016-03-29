@@ -81,7 +81,7 @@ all.equal(dmoeev(x, mu = 2, sigma = 2, alpha = 1), dweibull(x, shape=1/2, scale 
 
 }
 \author{
-Rumenick Pereira da Silva <rumenickbf@hotmail.com>
+Rumenick Pereira da Silva \email{rumenickps@gmail.com}
 }
 \references{
 Marshall, A. W., Olkin, I. (1997). A new method for adding a parameter to a family of

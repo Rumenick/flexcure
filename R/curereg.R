@@ -415,11 +415,12 @@ curereg.dists <- list(
 #' Peng, Y., Dear, K. B., & Denham, J. W. (1998). A generalized F mixture model for cure rate
 #' estimation. Statistics in medicine, 17(8), 813-830.
 #'
-#' @author Rumenick Pereira da Silva <rumenickbf@hotmail.com>
+#' @author Rumenick Pereira da Silva \email{rumenickps@gmail.com}
 #'
-#' @seealso \code{\link{confint.curereg}} for confidence intervals for the coefficients, \code{\link{predict.curereg}} for predict cure rates
-#' from fitted \code{curereg} model, \code{\link{plot.curereg}} and \code{\link{lines.curereg}} to
-#' plot fitted survival, hazards and cumulative hazards from models fitted by \code{\link{curereg}}.
+#' @seealso \code{\link{confint.curereg}} for confidence intervals for the coefficients,
+#' \code{\link{curefraction}} for predict cure fractions from fitted \code{curereg} model,
+#' \code{\link{plot.curereg}} and \code{\link{lines.curereg}} to plot fitted survival, hazards
+#' and cumulative hazards from models fitted by \code{\link{curereg}}.
 #'
 #' @examples
 #' ## fit Marshall-Olkin extended extreme value standart mixture model
@@ -679,17 +680,49 @@ summary.curereg  <- function(object, ...) {
 # terms = time or cure or missing (default)
 #' @export
 coef.curereg <- function(object, ...){
-  if(missing(terms)) object$coefficients else object$coefficients[[paste0("coef.",terms)]]
+  args <- list(...)
+  if(is.null(args$terms)) object$coefficients else object$coefficients[[paste0("coef.",args$terms)]]
 }
 
-# Predict cure fraction
+#' @title Predict cure fractions
+#'
+#' @name curefraction
+#'
+#' @description Predict cure fractions from fitted \code{curereg} model.
+#'
+#' @param object an object of curereg.
+#' @param newData um novo conjunto de dados com estrutura semelhante a utilizada no ajuste
+#' (opcional). Se newData nao e especificado e utilizado o conjunto de dados usado
+#'  no ajuste.
+#' @param unique se igual a TRUE (unique = TRUE por padrao) sao escolhidos nos dados as linhas
+#'  de perfis unicos, ou seja, sao escolhidos apenas os clientes que possuem caracteristicas
+#'  diferentes.
+#' @param ordered se igual a TRUE (ordered = TRUE por padrao) os dados sao ordenados em relacao
+#' a fracao de cura.
+#' @param n (n = 6 por padrao), argumento passado as funcoes \code{\link{head}} e
+#' \code{\link{tail}} que informam quantas linhas do inicio e do fim do conjunto de
+#' dados devem ser mostradas na saida da funcao.
+#'
+#' @details O argumento \code{newData} quando utilizado deve ser estrutura de acordo com a saida
+#' \code{coef(fit, terms = "cure")}, ou seja, variável que sao fatores devem ser convertidas em
+#' dummes. Alem disso, deve ser considerada a ordem em que aparecem os coeficientes associado a
+#' cada uma das variaveis.
+#'
+#' @return Retorna um data.frame dos dados adicionado de uma coluna com as fracoes de cura
+#' (coluna curefraction).
+#'
+#' @author Rumenick Pereira da Silva \email{rumenickps@gmail.com}
+#'
+#' @keywords predict models
+#'
 #' @export
-curefraction <- function(x, newData = NULL, unique = TRUE, ordered = TRUE, n = 6){
-  if(!inherits(x, "curereg")) stop("Object must be results of curereg")
-  curefun <- if(x$ncausedist == "poisson") function(x) exp(-exp(x)) else function(x) logit(x, inverse = TRUE)
-  df <- if(is.null(newData)) x$Z else newData
+curefraction <- function(object, newData, unique = TRUE, ordered = TRUE, n = 6){
+  if(!inherits(object, "curereg")) stop("Object must be results of curereg")
+  if(is.na(object$coefficients$coef.cure)) stop("Not stated 'cureformula'!\n")
+  curefun <- if(object$ncausedist == "poisson") function(x) exp(-exp(x)) else function(x) logit(x, inverse = TRUE)
+  df <- if(missing(newData)) object$Z else newData
   df <- if(unique) unique(df) else df
-  cure <- curefun(tcrossprod(coef(x, terms = "cure"), df))[,]
+  cure <- curefun(tcrossprod(object$coefficients$coef.cure, df))[,]
   df <- if(ordered) cbind(df[,-1], curefraction = cure)[order(cure),] else cbind(df[,-1], curefraction = cure)
   cat("head:\n")
   print(head(df, n = n))
@@ -698,17 +731,44 @@ curefraction <- function(x, newData = NULL, unique = TRUE, ordered = TRUE, n = 6
   invisible(df)
 }
 
-
-# predict.curereg <- function(x, newX, newZ, ...) {
-#
-# }
-
+#' @title Plots of fitted flexible survival models with cure fraction
+#'
+#' @name plot.curereg
+#'
+#' @description Plot fitted survival, cumulative hazard or hazard from a parametric model
+#' against nonparametric estimates to diagnose goodness-of-fit.
+#'
+#' @param x an object of \code{\link{curereg}}.
+#' @param ... Other options to be passed to \code{\link{plot.flexsurvreg}}  or \code{\link{plot.survfit}}.
+#'
+#' @author Rumenick Pereira da Silva \email{rumenickps@gmail.com}
+#'
+#' @seealso \code{\link{curereg}}, \code{\link{flexsurvreg}}
+#'
+#' @keywords plot models
+#'
 #' @importFrom  flexsurv plot.flexsurvreg
 #' @export
 plot.curereg <- function(x, ...) {
   flexsurv::plot.flexsurvreg(x$flexsurv, ...)
 }
 
+#' @title Add fitted flexible survival with cure fraction curves to a plot
+#'
+#' @name lines.curereg
+#'
+#' @description Add fitted survival (or hazard or cumulative hazard) curves from a curereg
+#' model fit to an existing plot.
+#'
+#' @param x an object of \code{\link{curereg}}.
+#' @param ... Other options to be passed to \code{\link{plot.flexsurvreg}}  or \code{\link{plot.survfit}}.
+#'
+#' @author Rumenick Pereira da Silva \email{rumenickps@gmail.com}
+#'
+#' @seealso \code{\link{curereg}}, \code{\link{flexsurvreg}}
+#'
+#' @keywords plot models
+#'
 #' @importFrom  flexsurv lines.flexsurvreg
 #' @export
 lines.curereg <- function(x, ...) {

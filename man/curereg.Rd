@@ -160,7 +160,7 @@ vcov(fitmo)
 
 }
 \author{
-Rumenick Pereira da Silva <rumenickbf@hotmail.com>
+Rumenick Pereira da Silva \email{rumenickps@gmail.com}
 }
 \references{
 Jackson, C.H. Christopher Jackson (2015). flexsurv: Flexible Parametric Survival and Multi-State Models.
@@ -177,9 +177,10 @@ Peng, Y., Dear, K. B., & Denham, J. W. (1998). A generalized F mixture model for
 estimation. Statistics in medicine, 17(8), 813-830.
 }
 \seealso{
-\code{\link{confint.curereg}} for confidence intervals for the coefficients, \code{\link{predict.curereg}} for predict cure rates
-from fitted \code{curereg} model, \code{\link{plot.curereg}} and \code{\link{lines.curereg}} to
-plot fitted survival, hazards and cumulative hazards from models fitted by \code{\link{curereg}}.
+\code{\link{confint.curereg}} for confidence intervals for the coefficients,
+\code{\link{curefraction}} for predict cure fractions from fitted \code{curereg} model,
+\code{\link{plot.curereg}} and \code{\link{lines.curereg}} to plot fitted survival, hazards
+and cumulative hazards from models fitted by \code{\link{curereg}}.
 }
 \keyword{models}
 \keyword{survival}

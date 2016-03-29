@@ -44,7 +44,7 @@ pev <- function(q, mu = 0, sigma, lower.tail = TRUE, log.p = FALSE){
 #' the p value of test under null hypothesis chi-square distribution.
 #' }
 #'
-#' @author Rumenick Pereira da Silva <rumenickbf@hotmail.com>
+#' @author Rumenick Pereira da Silva \email{rumenickps@gmail.com}
 #'
 #' @examples
 #'
