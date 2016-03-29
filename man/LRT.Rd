@@ -4,13 +4,13 @@
 \alias{LRT}
 \title{Likelihood ratio test}
 \usage{
-LRT(fitg, fits)
+LRT(fits, fitg)
 }
 \arguments{
-\item{fitg}{an object that stores the results of
+\item{fits}{an object that stores the results of
 curereg fit of the model under the null hypothesis.}
 
-\item{fits}{an object that stores the results of curereg fit
+\item{fitg}{an object that stores the results of curereg fit
 of the model under the alternative hypothesis.}
 }
 \value{
@@ -31,16 +31,26 @@ function.
 }
 \examples{
 
-data(e1684)
-fitg <- curereg(Surv(FAILTIME, FAILCENS) ~ 1, cureformula = ~ 1,
-                 data = e1684, timedist = "moeev", ncausedist = "bernoulli")
-fits <- curereg(Surv(FAILTIME, FAILCENS) ~ 1, cureformula = ~ 1,
-                 data = e1684, timedist = "moee", ncausedist = "bernoulli")
-LRT(fitg, fits)
+# ?rmoeevsm
+df <- rmoeevsm(n = 500, mu = 0, sigma = 1, alpha = 1, theta = .2, control = 15)
+
+# Model under the null hypothesis (sigma = 1)
+fits <- curereg(Surv(time, status) ~ 1, cureformula = ~ 1,
+data = df, timedist = "moee", ncausedist = "bernoulli",
+method = "BFGS")
+
+# Model under the alternative hypothesis (sigma != 1)
+fitg <- curereg(Surv(time, status) ~ 1, cureformula = ~ 1,
+data = df, timedist = "moeev", ncausedist = "bernoulli",
+method = "BFGS")
+LRT(fits, fitg)
 
 }
 \author{
 Rumenick Pereira da Silva \email{rumenickps@gmail.com}
+}
+\seealso{
+\code{\link{curereg}}, \code{\link{plot.curereg}}, \code{\link{lines.curereg}}
 }
 \keyword{test}
 

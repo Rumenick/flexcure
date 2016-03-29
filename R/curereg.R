@@ -317,7 +317,7 @@ curereg.dists <- list(
 #'
 #' The exponential, Weibull, log-normal and log-logistic distributions have the same
 #' parameterization defined in \code{\link{dexp}}, \code{\link{dweibull}}, \code{\link{dlnorm}}
-#' from package \pkg{base} and \code{\link{dllogist}} from package \pkg{flexsurv}, respectively.
+#' from package \pkg{base} and \code{\link{dllogis}} from package \pkg{flexsurv}, respectively.
 #' respectively. These differ from the parametrization used in the package \pkg{survreg}.
 #' The generalised Gamma and Generalised F distributions follows the parametrisation in
 #' (\code{\link{dgengamma}}) and (\code{\link{dgenf}}), respectively, both available in
@@ -704,8 +704,8 @@ coef.curereg <- function(object, ...){
 #' dados devem ser mostradas na saida da funcao.
 #'
 #' @details O argumento \code{newData} quando utilizado deve ser estrutura de acordo com a saida
-#' \code{coef(fit, terms = "cure")}, ou seja, variável que sao fatores devem ser convertidas em
-#' dummes. Alem disso, deve ser considerada a ordem em que aparecem os coeficientes associado a
+#' \code{coef(fit, terms = "cure")}, ou seja, variaveis que sao fatores devem ser convertidas em
+#' dummy. Alem disso, deve ser considerada a ordem em que aparecem os coeficientes associados a
 #' cada uma das variaveis.
 #'
 #' @return Retorna um data.frame dos dados adicionado de uma coluna com as fracoes de cura
@@ -718,7 +718,7 @@ coef.curereg <- function(object, ...){
 #' @export
 curefraction <- function(object, newData, unique = TRUE, ordered = TRUE, n = 6){
   if(!inherits(object, "curereg")) stop("Object must be results of curereg")
-  if(is.na(object$coefficients$coef.cure)) stop("Not stated 'cureformula'!\n")
+  if(any(is.na(object$coefficients$coef.cure))) stop("Not stated 'cureformula'!\n")
   curefun <- if(object$ncausedist == "poisson") function(x) exp(-exp(x)) else function(x) logit(x, inverse = TRUE)
   df <- if(missing(newData)) object$Z else newData
   df <- if(unique) unique(df) else df

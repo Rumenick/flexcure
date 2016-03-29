@@ -7,10 +7,10 @@
 #' @aliases dmoeev pmoeev qmoeev rmoeev
 #'
 #' @usage
-#' dmoeev(x, mu = 0, sigma, alpha = 1, log = FALSE)
-#' pmoeev(q, mu = 0, sigma, alpha = 1, lower.tail = TRUE, log.p = FALSE)
-#' qmoeev(p, mu = 0, sigma, alpha = 1, lower.tail = TRUE, log.p = FALSE)
-#' rmoeev(n, mu = 0, sigma, alpha = 1)
+#' dmoeev(x, mu = 0, sigma = 1, alpha, log = FALSE)
+#' pmoeev(q, mu = 0, sigma = 1, alpha, lower.tail = TRUE, log.p = FALSE)
+#' qmoeev(p, mu = 0, sigma = 1, alpha, lower.tail = TRUE, log.p = FALSE)
+#' rmoeev(n, mu = 0, sigma = 1, alpha)
 #'
 #' @description Density, distribution function, quantile function and random generation
 #' for the Marshall-Olkin extended extreme value distribution (MOEEV) distribution with
@@ -45,7 +45,7 @@
 #' we obtain the Marshall-Olkin Extended Weibull (MOEW) distribution. With the above definitions,
 #'
 #' if MOEE:
-#' \code{dmoeev(x, mu = -log(rate), sigma = 1, alpha)}
+#' \code{dmoeev(x, mu = -log(rate), sigma = 1, alpha) = dmoee(x, mu, alpha)}
 #'
 #' if MOEW:
 #' \code{dmoeev(x, mu = log(scale), sigma = 1/shape, alpha)}
@@ -80,7 +80,7 @@
 #'
 #' @include utils-flexsurv.R
 #' @export
-dmoeev <- function(x, mu = 0, sigma, alpha = 1, log = FALSE) {
+dmoeev <- function(x, mu = 0, sigma = 1, alpha, log = FALSE) {
   d <- dbase("moeev", log = log, x = x, mu = mu, sigma = sigma, alpha = alpha)
   for (i in seq_along(d)) assign(names(d)[i], d[[i]])
   shape <- 1/sigma

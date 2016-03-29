@@ -35,7 +35,7 @@ the variables shoud be available in the workspace (see \code{(.GlobalEnv)}).}
 
 The exponential, Weibull, log-normal and log-logistic distributions have the same
 parameterization defined in \code{\link{dexp}}, \code{\link{dweibull}}, \code{\link{dlnorm}}
-from package \pkg{base} and \code{\link{dllogist}} from package \pkg{flexsurv}, respectively.
+from package \pkg{base} and \code{\link{dllogis}} from package \pkg{flexsurv}, respectively.
 respectively. These differ from the parametrization used in the package \pkg{survreg}.
 The generalised Gamma and Generalised F distributions follows the parametrisation in
 (\code{\link{dgengamma}}) and (\code{\link{dgenf}}), respectively, both available in

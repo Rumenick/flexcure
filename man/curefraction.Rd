@@ -33,8 +33,8 @@ Predict cure fractions from fitted \code{curereg} model.
 }
 \details{
 O argumento \code{newData} quando utilizado deve ser estrutura de acordo com a saida
-\code{coef(fit, terms = "cure")}, ou seja, variável que sao fatores devem ser convertidas em
-dummes. Alem disso, deve ser considerada a ordem em que aparecem os coeficientes associado a
+\code{coef(fit, terms = "cure")}, ou seja, variaveis que sao fatores devem ser convertidas em
+dummy. Alem disso, deve ser considerada a ordem em que aparecem os coeficientes associados a
 cada uma das variaveis.
 }
 \author{

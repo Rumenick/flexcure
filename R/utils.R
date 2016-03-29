@@ -1,21 +1,25 @@
 # Marshall-Olkin extended exponential distribution (Marshall & Olkin, 1997)
 
-dmoee <- function(x, mu = 0, alpha = 1, log=FALSE){
+#' @export
+dmoee <- function(x, mu = 0, alpha = 1, log = FALSE){
   dens <- suppressWarnings(dmoeev(x = x, mu = mu, sigma = 1, alpha = alpha, log = log))
   dens
 }
 
+#' @export
 pmoee <- function(q, mu = 0, alpha = 1, lower.tail = TRUE, log.p = FALSE){
   prob <- suppressWarnings(pmoeev(q = q, mu = mu, sigma = 1, alpha = alpha, lower.tail = lower.tail, log.p = log.p))
 }
 
 # Extreme value distribuition
 
+#' @export
 dev <- function(x, mu = 0, sigma = 1, log=FALSE){
   dens <- suppressWarnings(dmoeev(x = x, mu = mu, sigma = sigma, alpha = 1, log = log))
   dens
 }
 
+#' @export
 pev <- function(q, mu = 0, sigma, lower.tail = TRUE, log.p = FALSE){
   prob <- suppressWarnings(pmoeev(q = q, mu = mu, sigma = sigma, alpha = 1, lower.tail = lower.tail, log.p = log.p))
 }
@@ -27,9 +31,9 @@ pev <- function(q, mu = 0, sigma, lower.tail = TRUE, log.p = FALSE){
 #'
 #' @description Computes the likelihood ratio test.
 #'
-#' @param fitg an object that stores the results of
+#' @param fits an object that stores the results of
 #' curereg fit of the model under the null hypothesis.
-#' @param fits an object that stores the results of curereg fit
+#' @param fitg an object that stores the results of curereg fit
 #' of the model under the alternative hypothesis.
 #'
 #' @details The objects fitg and fits are obtained
@@ -46,20 +50,29 @@ pev <- function(q, mu = 0, sigma, lower.tail = TRUE, log.p = FALSE){
 #'
 #' @author Rumenick Pereira da Silva \email{rumenickps@gmail.com}
 #'
+#' @seealso \code{\link{curereg}}, \code{\link{plot.curereg}}, \code{\link{lines.curereg}}
+#'
 #' @examples
 #'
-#' data(e1684)
-#' fitg <- curereg(Surv(FAILTIME, FAILCENS) ~ 1, cureformula = ~ 1,
-#'                  data = e1684, timedist = "moeev", ncausedist = "bernoulli")
-#' fits <- curereg(Surv(FAILTIME, FAILCENS) ~ 1, cureformula = ~ 1,
-#'                  data = e1684, timedist = "moee", ncausedist = "bernoulli")
-#' LRT(fitg, fits)
+#' # ?rmoeevsm
+#' df <- rmoeevsm(n = 500, mu = 0, sigma = 1, alpha = 1, theta = .2, control = 15)
+#'
+#' # Model under the null hypothesis (sigma = 1)
+#' fits <- curereg(Surv(time, status) ~ 1, cureformula = ~ 1,
+#' data = df, timedist = "moee", ncausedist = "bernoulli",
+#' method = "BFGS")
+#'
+#' # Model under the alternative hypothesis (sigma != 1)
+#' fitg <- curereg(Surv(time, status) ~ 1, cureformula = ~ 1,
+#' data = df, timedist = "moeev", ncausedist = "bernoulli",
+#' method = "BFGS")
+#' LRT(fits, fitg)
 #'
 #' @keywords test
 
 
 #' @export
-LRT <- function(fitg, fits){
+LRT <- function(fits, fitg){
   distname <- switch(fits$timedist,
                      exp = "Exponential",
                      weibull = "Weibull",
@@ -76,9 +89,9 @@ LRT <- function(fitg, fits){
   est <- 2 * (logLik(fitg) - logLik(fits))
   p <- pchisq(est, gl, lower.tail = F)
   cat("      Likelihood ratio test\n\n")
-  pvalue <- if(p < .Machine$double.eps) paste("p-value <", format(.Machine$double.eps, digits = 2)) else paste("p-value =", p)
-  cat(" LRS =", est, ",", "df =", gl, ",", pvalue, "\n alternative hypothesis:\n",
-      paste(distname, ifelse(is.null(fits$dcure), "", fits$dcure), sep=" "), "\n is not suitable\n")
+  pvalue <- if(p < .Machine$double.eps) paste(" p-value <", format(.Machine$double.eps, digits = 2)) else paste("p-value =", format(p, digits = 4))
+  cat(" LRS = ", format(est, digits = 4), ",", " df = ", gl, ", ", pvalue, "\n alternative hypothesis:\n",
+      paste("",distname, ifelse(is.null(fits$dcure), "", fits$dcure), sep=" "), "\n is not suitable\n", sep = "")
   invisible(list(LRS = est, pvalue = pvalue))
 }
 
