@@ -86,12 +86,12 @@ LRT <- function(fits, fitg){
                      genf = "Generalized F",
                      "Unknown")
   gl <- attr(logLik(fitg), "df") - attr(logLik(fits), "df")
-  est <- 2 * (logLik(fitg) - logLik(fits))
+  est <- 2 * (logLik(fitg) - logLik(fits))[1]
   p <- pchisq(est, gl, lower.tail = F)
   cat("      Likelihood ratio test\n\n")
   pvalue <- if(p < .Machine$double.eps) paste(" p-value <", format(.Machine$double.eps, digits = 2)) else paste("p-value =", format(p, digits = 4))
   cat(" LRS = ", format(est, digits = 4), ",", " df = ", gl, ", ", pvalue, "\n alternative hypothesis:\n",
       paste("",distname, ifelse(is.null(fits$dcure), "", fits$dcure), sep=" "), "\n is not suitable\n", sep = "")
-  invisible(list(LRS = est, pvalue = pvalue))
+  invisible(list(LRS = est, pvalue = p))
 }
 

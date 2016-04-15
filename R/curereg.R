@@ -328,10 +328,11 @@ curereg.dists <- list(
 #' \code{ncausedist = "poisson"} (default), for the promotion time model.
 #'
 #' @param inits optional list with the initial values for the parameters. This list should be
-#' set as \code{inits = list(coef_cure = c(...), coef_time = c(...), sigma = ..., Q = ...)}
+#' set as \code{inits = list(coef_cure = c(...), coef_time = c(...),  others = c(...))}
 #' where \code{coef_cure} is the vector of coefficients for the cure model, \code{coef_time}
-#' is the vector of coefficients for the survival regression model, \code{sigma} is  ...
-#' and \code{Q} is ... .
+#' is the vector of coefficients for the survival regression model and others is parameters
+#' that are not modeled by covariates.  See the object curereg.dists or flexsurv.dists in the
+#' source for the exact methods used.
 #'
 #' @param subset optional numeric vector specifying the subset observations from the full data set.
 #'
@@ -468,6 +469,8 @@ curereg <- function(formula, cureformula=~1, data, weights, timedist = "moeev",
     argsfun$anc <- NULL
     cureformula <- NULL
     dcure <- NULL
+    if (!missing(inits)) argsfun$inits <- c(inits$coef_time[1], inits$others,
+                                          inits$coef_time[-1])
   }
   else {
     ncausedist <- match.arg(tolower(ncausedist), c("bernoulli", "poisson"))
@@ -484,7 +487,8 @@ curereg <- function(formula, cureformula=~1, data, weights, timedist = "moeev",
       curereg.dists[[dist]]$inits <- curereg.dists[[dist]]$inits(initp=initp)
     }
     else {
-      argsfun$inits <- inits
+      argsfun$inits <- c(inits$coef_cure[1], inits$coef_time[1], inits$others,
+                         inits$coef_time[-1], inits$coef_cure[-1])
       }
   }
 

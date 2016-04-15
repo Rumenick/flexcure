@@ -52,10 +52,11 @@ possible arguments \code{na.omit} and \code{na.fail}. The default is set by the
 \code{na.action} setting in \code{options()}.}
 
 \item{inits}{optional list with the initial values for the parameters. This list should be
-set as \code{inits = list(coef_cure = c(...), coef_time = c(...), sigma = ..., Q = ...)}
+set as \code{inits = list(coef_cure = c(...), coef_time = c(...),  others = c(...))}
 where \code{coef_cure} is the vector of coefficients for the cure model, \code{coef_time}
-is the vector of coefficients for the survival regression model, \code{sigma} is  ...
-and \code{Q} is ... .}
+is the vector of coefficients for the survival regression model and others is parameters
+that are not modeled by covariates.  See the object curereg.dists or flexsurv.dists in the
+source for the exact methods used.}
 
 \item{method}{The optimisation method to be used. \code{method = "BFGS"} is the default
 however "Nelder-Mead", "CG", "L-BFGS-B" and "SANN" can also be used, For more information
