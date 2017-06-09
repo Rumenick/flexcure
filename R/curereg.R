@@ -776,7 +776,7 @@ plot.curereg <- function(x, ...) {
 #' @importFrom  flexsurv lines.flexsurvreg
 #' @export
 lines.curereg <- function(x, ...) {
-  flexsurv::lines.flexsurvreg(x$flexsurv, ...)
+  flexsurv::plot.flexsurvreg(x$flexsurv, add = TRUE, ...)
 }
 
 #' @export
