@@ -751,10 +751,9 @@ curefraction <- function(object, newData, unique = TRUE, ordered = TRUE, n = 6){
 #'
 #' @keywords plot models
 #'
-#' @importFrom  flexsurv plot.flexsurvreg
 #' @export
 plot.curereg <- function(x, ...) {
-  flexsurv::plot.flexsurvreg(x$flexsurv, ...)
+  plot(x$flexsurv, ...)
 }
 
 #' @title Add fitted flexible survival with cure fraction curves to a plot
@@ -773,10 +772,9 @@ plot.curereg <- function(x, ...) {
 #'
 #' @keywords plot models
 #'
-#' @importFrom  flexsurv lines.flexsurvreg
 #' @export
 lines.curereg <- function(x, ...) {
-  flexsurv::plot.flexsurvreg(x$flexsurv, add = TRUE, ...)
+  plot(x$flexsurv, add = TRUE, ...)
 }
 
 #' @export
