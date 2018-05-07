@@ -430,7 +430,7 @@ pgengammapt <- function(q, mu = 0, sigma = 1, Q, theta = 1, lower.tail = TRUE, l
 }
 
 #' @export
-rgengammasm <- function(n = 1e+3, mu = 0, sigma = 1, Q, theta, control=1e+3) {
+rgengammapt <- function(n = 1e+3, mu = 0, sigma = 1, Q, theta, control=1e+3) {
   rgeneric(n = n,
            rtimedist = 'rgengamma',
            rncausedist = 'rpois',
