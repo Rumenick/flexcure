@@ -9,6 +9,9 @@ To install the GitHub version you need to have the package `devtools` installed.
 
 ``` r
 # install.packages("devtools") # run this to install the devtools package
+options(download.file.method="libcurl")
+install.packages("flexsurv")
+remove.packages("flexsurv")
 install.packages("https://cran.r-project.org/src/contrib/Archive/flexsurv/flexsurv_1.0.0.tar.gz", repos = NULL, type = "source")
 devtools::install_github('rumenick/flexcure', upgrade_dependencies = FALSE)
 ```
